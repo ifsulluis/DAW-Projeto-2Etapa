@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="titulo">Edição de Especialidades</ui:define>
+        <ui:define name="conteudo">
+            <h:form>
+                <p:messages/>
+                <p:growl/>
+                <p:panelGrid columns="2" >
+                    <f:facet name="footer">
+                        <div align="center">
+                            <p:commandButton value="Cancelar"
+                                             action="#{controleEspecialidade.cancelar()}"
+                                             immediate="true" ajax="false"/>
+                            <p:commandButton value="Salvar"
+                                             action="#{controleEspecialidade.salvar()}" ajax="false"/>
+                        </div>
+                    </f:facet>
+                    <p:outputLabel value="ID"/>
+                    <p:inputText value="#{controleEspecialidade.objeto.id}"
+                                 readonly="true" size="12"/>
+                    <p:outputLabel value="Descricao" for="txtDescricao"/>
+                    <p:inputText value="#{controleEspecialidade.objeto.descricao}" id="txtDescricao"
+                                 size="40" maxlength="40" placeholder="Obrigatório"/>
+                               
+
+                </p:panelGrid>
+            </h:form>            
+        </ui:define>
+    </ui:composition>    
+
+</html>
+
