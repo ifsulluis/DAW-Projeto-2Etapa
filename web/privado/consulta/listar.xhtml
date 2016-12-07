@@ -60,7 +60,7 @@
                         <p:outputLabel value="#{obj.data.time}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </p:outputLabel>
-                    </p:column>                    
+                    </p:column> 
                     
                     <p:column headerText="Ações">
                         <div align="center">
@@ -98,11 +98,13 @@
                                 <p:panelGrid columns="2">
                                     <f:facet name="footer">
                                         <div align="center">
-                                            <p:commandButton value="Salvar"
+                                            
+                                            <p:commandButton actionListener="#{controleConsulta.salvar()}"
+                                                             update=":formListagem :formEdicao"
+                                                             value="Salvar"
                                                              icon="ui-icon-disk"
-                                                             actionListener="#{controleConsulta.salvar()}"
-                                                             update=":formEdicao :formListagem"
-                                                             oncomplete="if(!args.validationFailed){PF('dlg').hide();}"/>
+                                                             oncomplete="if (!args.validationFailed) {PF('dlg').hide();}"/>
+                                        
                                         </div>
                                     </f:facet>
                                     <p:outputLabel value="ID"/>
@@ -116,27 +118,12 @@
                                     </p:calendar>
                                     
                                     
-                                   
-                                   <!-- COMENTADO POIS TEM DUAS DECLARAÇÕES
-                                    
-                                    <p:outputLabel value="Paciente" for="selectPaciente"/>
-                                    
-                                    
-                                    
-                                    <p:selectOneMenu id="selectPaciente"
-                                                     value="#{controleConsulta.objeto.paciente}">
-                                        <f:converter converterId="converterPaciente"/>
-                                        <f:selectItem itemLabel="Selecione um registro"
-                                                      noSelectionOption="true"/>
-                                        <f:selectItems value="#{controleConsulta.daoPaciente.listaTodos}"
-                                                       var="p" itemLabel="#{p.nome}"/>
-                                    </p:selectOneMenu>
-                                    
-                                    
-                                    
-                                    
-                                    -->
-                                    
+                                    <p:outputLabel value="Hora" for="txtHora"/>
+                                    <p:calendar id="txtHora" value="#{controleConsulta.objeto.hora}"
+                                                pattern="HH:mm:ss" mask="true" locale="pt_BR"
+                                                navigator="true">
+                                        <f:converter converterId="converterHora"/>
+                                    </p:calendar>
                                     
                                     
                                     <p:outputLabel value="Paciente" for="selectPaciente"/>
@@ -147,7 +134,22 @@
                                                       noSelectionOption="true"/>
                                         <f:selectItems value="#{controleConsulta.daoPaciente.listaTodos}"
                                                        var="p" itemLabel="#{p.nome}"/>
-                                    </p:selectOneMenu>                                    
+                                    </p:selectOneMenu>     
+                                    
+                                    
+                                    <p:outputLabel value="Pré-Consulta" for="txtPreconsulta"/>
+                                    <p:inputText  id="txtPreconsulta"
+                                                  value="#{controleConsulta.objeto.preconsulta}"
+                                                 size="30"/>
+                                    
+                                    
+                                    
+                                    <p:outputLabel value="Pós-Consulta" for="txtPosconsulta"/>
+                                    <p:inputText  id="txtPosconsulta"
+                                                  value="#{controleConsulta.objeto.posconsulta}"
+                                                 size="30"/>
+                                    
+                                    
                                 </p:panelGrid>
                             </div>
                         </p:tab>
@@ -176,12 +178,11 @@
                                         <p:commandButton id="btnAlterarExame" icon="ui-icon-plus"
                                                          actionListener="#{controleConsulta.alterarExame(idx)}"
                                                          update=":formExame" process="btnAlterarExame"
-                                                         oncomplete="PF('dlgexame').show();"/>
+                                                         oncomplete="PF('dlgExame').show();"/>
                                         <p:commandButton id="btnRemoverExame" icon="ui-icon-trash"
                                                          actionListener="#{controleConsulta.removerExame(idx)}"
                                                          process="btnRemoverExame"
-                                                         update="listaExames :formListagem:growl 
-                                                         :formEdicao:tab:txtNome"
+                                                         update="listaExames"
                                                          onclick="if (!confirm('Confirma a exclusão do objeto?'))
                                                                      return false"/>
                                     </div>
@@ -206,6 +207,7 @@
                                                      value="Salvar"
                                                      icon="ui-icon-plus"
                                                      actionListener="#{controleConsulta.salvarExame()}"
+                                                     update=":formEdicao:tab:listaExames"
                                                      
                                                      process="@form"
                                                      oncomplete="if(!args.validationFailed){PF('dlgExame').hide();}"/> 
@@ -219,7 +221,7 @@
                             </p:inputText>
                             <p:outputLabel value="Descrição" for="txtDescricao"/>
                             <p:inputText value="#{controleConsulta.exame.descricao}"
-                                         id="txtDescricao" maxlength="12" size="12"/>
+                                         id="txtDescricao"  size="12"/>
                             
                         </p:panelGrid> 
                     </div>

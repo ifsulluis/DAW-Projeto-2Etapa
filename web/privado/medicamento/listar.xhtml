@@ -28,7 +28,7 @@
                         <p:commandButton value="Filtrar" update="listagem growl"
                                          icon="ui-icon-search"/>
                         <p:outputLabel value="Máximo de objetos:"/>
-                        <p:inputText value="#{controleProduto.dao.maximoObjetos}" size="3">
+                        <p:inputText value="#{controleMedicamento.dao.maximoObjetos}" size="3">
                             <p:ajax event="keyup" update="listagem"/>
                         </p:inputText>
                         <p:commandButton value="Primeiro" actionListener="#{controleMedicamento.dao.primeiro()}"
@@ -87,7 +87,7 @@
                                 </div>
                             </f:facet>
                             <p:outputLabel value="ID"/>
-                            <p:inputText value="#{controlemedicamento.objeto.id}"/>
+                            <p:inputText value="#{controleMedicamento.objeto.id}"/>
                             
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText id="txtNome"

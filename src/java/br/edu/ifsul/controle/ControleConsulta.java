@@ -40,6 +40,12 @@ public class ControleConsulta implements Serializable {
     }
     
     
+    public void imprimeMedico(){
+        HashMap parametros = new HashMap();
+        UtilRelatorios.imprimeRelatorio("relatorioMedicosJavaBeans", 
+                parametros, daoMedico.getListaTodos());
+    }
+    
     
     public void imprimeConsulta(Integer id){
         objeto = dao.localizar(id);
@@ -112,12 +118,12 @@ public class ControleConsulta implements Serializable {
     public void salvarExame() {
         if (novoExame) {
             objeto.adicionarExame(exame);
-        } else {
-            
-        }
+        } 
         UtilMensagens.mensagemInformacao("Operação realizada com sucesso");
     }
 
+   
+    
    
     public void removerExame(int index) {
         objeto.removerExame(index);
